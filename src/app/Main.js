@@ -12,6 +12,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import AppBarExampleIcon from './Example'; // Our custom react component
 
+
+
+
+
 const styles = {
   container: {
     textAlign: 'center',
@@ -66,17 +70,8 @@ class Main extends Component {
           >
             1-2-3-4
           </Dialog>
-          <h1>Material-UI</h1>
-
 
           <AppBarExampleIcon />
-
-          <h2>example project</h2>
-          <RaisedButton
-            label="Super Secret Password"
-            secondary={true}
-            onTouchTap={this.handleTouchTap}
-          />
         </div>
       </MuiThemeProvider>
     );

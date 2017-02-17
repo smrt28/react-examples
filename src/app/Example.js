@@ -2,15 +2,24 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
+
+import {List, ListItem} from 'material-ui/List';
+import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import ContentSend from 'material-ui/svg-icons/content/send';
+import ContentDrafts from 'material-ui/svg-icons/content/drafts';
+import Divider from 'material-ui/Divider';
+import ActionInfo from 'material-ui/svg-icons/action/info';
+
 
 
 const style = {
   height: 200,
   width: 200,
   margin: 20,
-  textAlign: 'center',
   display: 'inline-flex'
 };
 
@@ -25,6 +34,34 @@ Lorem Ipsum is simply dummy text of the printing
 );
 
 
+class Percentil extends React.Component {
+    constructor(props) { 
+        super(props);
+        this.state = {
+            val: props.val,
+            max_size: props.max_size,
+            min_size: props.min_size,
+            x: props.x
+
+        }
+    }
+
+    render() {
+        var d = this.state.max_size - this.state.min_size;
+        var rectSize = (d/100) * this.state.val + this.state.min_size;
+        var x = this.state.x * (this.state.max_size+2);
+
+        var y = (this.state.max_size - rectSize) / 2;
+        x+=(this.state.max_size - rectSize) / 2;
+
+
+        return (
+        <rect x={x} y={y} width={rectSize}
+            height={rectSize} style={{fill: "green"}}/>
+        )
+    }
+
+}
 
 
 class CardExampleControlled extends React.Component {
@@ -32,7 +69,7 @@ class CardExampleControlled extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false
+      text: props.text
     };
   }
 
@@ -54,38 +91,24 @@ class CardExampleControlled extends React.Component {
 
   render() {
     return (
-<div style={{width: 400}}>
-      <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-        <CardHeader
-          title="URL Avatar"
-          subtitle="Subtitle"
-          actAsExpander={true}
-          showExpandableButton={true}
-        />
-        <CardText>
-          <Toggle
-            toggled={this.state.expanded}
-            onToggle={this.handleToggle}
-            labelPosition="right"
-            label="This toggle controls the expanded state of the component."
-          />
+<div style={{width: 400, height: 150, margin: 10, float: "left"}}>
+      <Card expanded={this.state.expanded}
+      style={{height:150, textAlign:"left"}}
+        onExpandChange={this.handleExpandChange}>
+        <CardTitle title={this.state.text} />
+        <CardText expandable={false}>
+        <div style={{width: 200, height: 50}}>
+        <svg>
+        <Percentil x={0} val={5} min_size={10} max_size={20}/>
+        <Percentil x={1} val={85} min_size={10} max_size={20}/>
+        <Percentil x={2} val={55} min_size={10} max_size={20}/>
+        <Percentil x={3} val={15} min_size={10} max_size={20}/>
+        <Percentil x={4} val={35} min_size={10} max_size={20}/>
+        <Percentil x={5} val={95} min_size={10} max_size={20}/>
+        </svg>
+        </div>
+
         </CardText>
-        <CardMedia
-          expandable={true}
-          overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-        >
-        </CardMedia>
-        <CardTitle title="Card title" subtitle="Card subtitle" expandable={true} />
-        <CardText expandable={true}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-        </CardText>
-        <CardActions>
-          <FlatButton label="Expand" onTouchTap={this.handleExpand} />
-          <FlatButton label="Reduce" onTouchTap={this.handleReduce} />
-        </CardActions>
       </Card>
 </div>
     );
@@ -101,10 +124,12 @@ const AppBarExampleIcon = () => (
         title="Title"
         iconClassNameRight="muidocs-icon-navigation-expand-more"
         />
-        AHOJ!
-        <PaperExampleSimple />
-
-<CardExampleControlled/>
+            <CardExampleControlled text="Good morning sunshine" />
+            <CardExampleControlled/>
+            <CardExampleControlled text="mi name is" />
+            <CardExampleControlled text="i don't know"/>
+            <CardExampleControlled text="Good morning" />
+            <CardExampleControlled/>
         </div>
         );
 

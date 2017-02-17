@@ -10,6 +10,11 @@ cd <project folder>/material-ui/examples/webpack-example
 npm install
 ```
 
+build all js's
+```
+webpack --config ./webpack-production.config.js 
+```
+
 Now you can run your local server:
 ```sh
 npm start

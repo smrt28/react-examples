@@ -5,6 +5,9 @@ http://redux.js.org/docs/basics/ExampleTodoList.html
 https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store
 http://redux.js.org/docs/basics/
 
+React dev-tools
+https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+
 
 
 

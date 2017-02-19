@@ -11,9 +11,26 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import AppBarExampleIcon from './Example'; // Our custom react component
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+function counter(state = 0, action) {
+  switch (action.type) {
+  case 'INCREMENT':
+    return state + 1
+  case 'DECREMENT':
+    return state - 1
+  default:
+    return state
+  }
+}
 
 
-
+  
+let store = createStore(counter);
+store.subscribe(() =>
+    console.log(store.getState())
+)
 
 
 const styles = {
@@ -50,6 +67,10 @@ class Main extends Component {
     });
   }
 
+  onClick = () => {
+      store.dispatch({ type: 'INCREMENT' })
+  }
+
   render() {
     const standardActions = (
       <FlatButton
@@ -60,6 +81,9 @@ class Main extends Component {
     );
 
     return (
+      
+    <Provider store={store}>
+    <div>
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={styles.container}>
           <Dialog
@@ -72,8 +96,11 @@ class Main extends Component {
           </Dialog>
 
           <AppBarExampleIcon />
+          <RaisedButton label="Default" onClick={this.onClick} />
         </div>
       </MuiThemeProvider>
+    </div>
+    </Provider>
     );
   }
 }
